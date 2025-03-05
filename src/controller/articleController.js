@@ -21,9 +21,18 @@ const articleController = {
             const { id } = req.params;
 
             const dataArticleById = await getArticleByIdTitle(id);
+
+            if (!dataArticleById) {
+                return res.status(404).json({
+                    status: 404,
+                    message: "Artikel tidak ditemukan",
+                    data: null,
+                });
+            }
+
             res.status(200).json({
                 status: 200,
-                message: "get data articlebyid success",
+                message: "Get data article by ID success",
                 data: dataArticleById,
             });
         } catch (err) {
